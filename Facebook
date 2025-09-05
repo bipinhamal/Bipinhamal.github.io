@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BipinBook</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+    }
+    /* Header */
+    .navbar {
+      background-color: #1877f2;
+      padding: 10px 20px;
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    /* Container */
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+    }
+    /* Post Box */
+    .post-box {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .post-box textarea {
+      width: 100%;
+      border: none;
+      outline: none;
+      resize: none;
+      font-size: 16px;
+    }
+    .post-box button {
+      background-color: #1877f2;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    /* Feed Post */
+    .post {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .post .author {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .post .actions {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10px;
+    }
+    .post .actions button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #555;
+      font-size: 14px;
+    }
+    .post .actions button:hover {
+      color: #1877f2;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">BipinBook</div>
+  
+  <div class="container">
+    <!-- Post Box -->
+    <div class="post-box">
+      <textarea id="postInput" rows="3" placeholder="What's on your mind?"></textarea>
+      <button onclick="addPost()">Post</button>
+    </div>
+
+    <!-- News Feed -->
+    <div id="feed">
+      <div class="post">
+        <div class="author">Bipin Hamal</div>
+        <div>Hello friends! Welcome to my new page 😊</div>
+        <div class="actions">
+          <button onclick="likePost(this)">👍 Like</button>
+          <button>💬 Comment</button>
+          <button>↗ Share</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function addPost() {
+      let input = document.getElementById("postInput");
+      let feed = document.getElementById("feed");
+
+      if (input.value.trim() === "") return;
+
+      let newPost = document.createElement("div");
+      newPost.className = "post";
+      newPost.innerHTML = `
+        <div class="author">You</div>
+        <div>${input.value}</div>
+        <div class="actions">
+          <button onclick="likePost(this)">👍 Like</button>
+          <button>💬 Comment</button>
+          <button>↗ Share</button>
+        </div>
+      `;
+      feed.prepend(newPost);
+      input.value = "";
+    }
+
+    function likePost(btn) {
+      if (btn.style.color === "blue") {
+        btn.style.color = "#555";
+      } else {
+        btn.style.color = "blue";
+      }
+    }
+  </script>
+</body>
+</html>
